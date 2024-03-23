@@ -5,13 +5,13 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.model';
 import { JwtPayload } from '../helpers/jwt';
 
-const extractTokenFromHeader = (request: Request): string | undefined => {
+export const extractTokenFromHeader = (request: Request): string | undefined => {
   const [type, token] = request.headers.authorization?.split(' ') ?? [];
   return type === 'Bearer' ? token : undefined;
 };
 
 /** A middleware to protect routes from unauthenticated users */
-const isLoggedIn = async (req: Request, res: Response, next: NextFunction) => {
+export const isLoggedIn = async (req: Request, res: Response, next: NextFunction) => {
   // Get token from authorization header
   const token = extractTokenFromHeader(req);
 
@@ -33,5 +33,3 @@ const isLoggedIn = async (req: Request, res: Response, next: NextFunction) => {
 
   next();
 };
-
-export { isLoggedIn };

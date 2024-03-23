@@ -11,7 +11,8 @@ export const signUp = async (data: UserAttrs): Promise<void> => {
 export const login = async (data: UserAttrs): Promise<string> => {
   const { email, password } = data;
 
-  const user = await User.findOne({ email }).select('+password');
+  // For testing, exec is important when select is attached
+  const user = await User.findOne({ email }).select('+password').exec();
   if (!user || !(await user.verifyPassword(password))) {
     throw new httpError.Unauthorized('Invalid credentials');
   }

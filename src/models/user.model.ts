@@ -15,7 +15,7 @@ export interface UserDoc extends mongoose.Document {
 }
 
 // Describes what properties and methods a user model has
-interface UserModel extends mongoose.Model<UserDoc> {
+export interface UserModel extends mongoose.Model<UserDoc> {
   build(attrs: UserAttrs): UserDoc;
 }
 
