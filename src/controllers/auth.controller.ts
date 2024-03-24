@@ -34,6 +34,6 @@ export const getProfile = (req: Request, res: Response) => {
   res.status(200).send({
     status: 'success',
     message: 'User profile retrieved successfully',
-    data: req.user,
+    data: { user: req.user },
   });
 };

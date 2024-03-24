@@ -1,6 +1,6 @@
 // @ts-nocheck
 import * as bcrypt from 'bcryptjs';
-import User, { UserDoc } from '../../../models/user.model';
+import { User, UserDoc } from '../../../models/user.model';
 
 jest.mock('bcryptjs', () => ({
   compare: jest.fn(),

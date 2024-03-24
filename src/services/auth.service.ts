@@ -1,6 +1,6 @@
 import httpError from 'http-errors';
 
-import User, { UserAttrs } from '../models/user.model';
+import { User, UserAttrs } from '../models/user.model';
 import { generateJwtToken } from '../helpers/jwt';
 
 export const signUp = async (data: UserAttrs): Promise<void> => {

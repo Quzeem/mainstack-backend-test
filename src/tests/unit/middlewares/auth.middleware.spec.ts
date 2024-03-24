@@ -4,16 +4,11 @@ import jwt from 'jsonwebtoken';
 import httpError from 'http-errors';
 
 import { extractTokenFromHeader, isLoggedIn } from '../../../middlewares/auth.middleware';
-import User from '../../../models/user.model';
+import { User } from '../../../models/user.model';
 
 // Mock the jwt module
 jest.mock('jsonwebtoken', () => ({
   verify: jest.fn(),
-}));
-
-// Mock the User model
-jest.mock('../../../models/user.model', () => ({
-  findById: jest.fn(),
 }));
 
 describe('Auth Middleware', () => {
@@ -90,7 +85,8 @@ describe('Auth Middleware', () => {
       req.headers = { authorization: 'Bearer token' };
 
       jwt.verify.mockReturnValue({ userId: 'userId' });
-      User.findById.mockResolvedValue(null);
+      const mockFindById = jest.fn().mockResolvedValue(null);
+      User.findById = mockFindById;
 
       await expect(isLoggedIn(req, res, next)).rejects.toThrow(httpError.Unauthorized);
       expect(next).not.toHaveBeenCalled();
@@ -101,7 +97,8 @@ describe('Auth Middleware', () => {
       const user = { _id: 'userId', email: 'test@test.com' };
 
       jwt.verify.mockReturnValue({ userId: 'userId' });
-      User.findById.mockResolvedValue(user);
+      const mockFindById = jest.fn().mockResolvedValue(user);
+      User.findById = mockFindById;
 
       await isLoggedIn(req, res, next);
 

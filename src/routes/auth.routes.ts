@@ -4,10 +4,10 @@ import express from 'express';
 import * as authController from '../controllers/auth.controller';
 import { isLoggedIn } from '../middlewares/auth.middleware';
 
-const authRouter = express.Router();
+const router = express.Router();
 
-authRouter.post('/sign-up', authController.signUp);
-authRouter.post('/login', authController.login);
-authRouter.get('/profile', isLoggedIn, authController.getProfile);
+router.post('/sign-up', authController.signUp);
+router.post('/login', authController.login);
+router.get('/profile', isLoggedIn, authController.getProfile);
 
-export default authRouter;
+export { router as authRouter };

@@ -54,4 +54,4 @@ UserSchema.methods.verifyPassword = async function (this: UserDoc, password: str
 };
 
 const User = mongoose.model<UserDoc, UserModel>('User', UserSchema);
-export default User;
+export { User };

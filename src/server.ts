@@ -1,8 +1,8 @@
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
-import logger from './helpers/customLogger';
-import app from './app';
+import { logger } from './helpers/customLogger';
+import { app } from './app';
 
 // Listen for uncaught exception event
 process.on('uncaughtException', (err) => {

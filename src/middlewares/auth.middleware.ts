@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import httpError from 'http-errors';
 import jwt from 'jsonwebtoken';
 
-import User from '../models/user.model';
+import { User } from '../models/user.model';
 import { JwtPayload } from '../helpers/jwt';
 
 export const extractTokenFromHeader = (request: Request): string | undefined => {

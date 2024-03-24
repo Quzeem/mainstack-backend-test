@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import logger from '../helpers/customLogger';
+import { logger } from '../helpers/customLogger';
 
 interface ValidationErrorDetail {
   message: string;
@@ -78,4 +78,4 @@ const globalErrorHandler = (err: CustomError, req: Request, res: Response, next:
   return res.status(statusCode).send({ status: 'error', message });
 };
 
-export default globalErrorHandler;
+export { globalErrorHandler };

@@ -1,6 +1,6 @@
 import httpError from 'http-errors';
 import { signUp, login } from './../../../services/auth.service';
-import User, { UserAttrs } from '../../../models/user.model';
+import { User, UserAttrs } from '../../../models/user.model';
 
 jest.mock('../../../helpers/jwt', () => ({
   generateJwtToken: jest.fn().mockReturnValue('token'),
