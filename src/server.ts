@@ -26,7 +26,9 @@ mongoose
 
 // Listen for incoming requests
 const port = process.env.PORT ?? 3000;
-app.listen(port, () => logger.info(`Listening on port ${port} in ${process.env.NODE_ENV} mode`));
+const server = app.listen(port, () =>
+  logger.info(`Listening on port ${port} in ${process.env.NODE_ENV} mode`),
+);
 
 // Listen for unhandled promise rejection event
 process.on('unhandledRejection', (err: unknown) => {
@@ -35,4 +37,12 @@ process.on('unhandledRejection', (err: unknown) => {
   } else {
     logger.error(`[UnhandledRejection]: ${String(err)}`);
   }
+});
+
+// Listen for termination signal event
+process.on('SIGTERM', () => {
+  logger.info('SIGTERM RECEIVED! Shutting down...');
+  server.close(() => {
+    logger.info('Process terminated!');
+  });
 });

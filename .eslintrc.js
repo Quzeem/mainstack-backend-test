@@ -3,7 +3,7 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ['standard-with-typescript', 'prettier'],
+  extends: ['love', 'prettier'],
   ignorePatterns: ['.eslintrc.js'],
   overrides: [],
   parserOptions: {
