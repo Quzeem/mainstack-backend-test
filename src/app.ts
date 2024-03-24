@@ -14,6 +14,9 @@ import { productRouter } from './routes/product.routes';
 
 const app = express();
 
+// Enable 'trust proxy' setting
+app.set('trust proxy', true);
+
 // Enable cors
 app.use(cors());
 
@@ -31,6 +34,14 @@ const limiter = rateLimit({
   message: 'Too many requests, please try again later.',
   standardHeaders: 'draft-7',
   legacyHeaders: false,
+  keyGenerator(request: Request, _response: Response): string {
+    if (!request.ip) {
+      console.error('Warning: request.ip is missing!');
+      return request.socket.remoteAddress!;
+    }
+
+    return request.ip.replace(/:\d+[^:]*$/, '');
+  },
 });
 app.use(limiter);
 
