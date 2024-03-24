@@ -33,7 +33,9 @@ export const updateProduct = async (
   return product;
 };
 
-export const deleteProduct = async (productId: string, user: UserDoc): Promise<void> => {
+export const deleteProduct = async (productId: string, user: UserDoc): Promise<ProductDoc> => {
   const product = await Product.findOneAndDelete({ _id: productId, user });
   if (!product) throw new httpError.NotFound('Product not found');
+
+  return product;
 };

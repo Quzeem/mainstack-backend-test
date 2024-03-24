@@ -4,7 +4,6 @@ import { UserDoc } from './user.model';
 
 // Describes what properties are required to create a product
 export interface ProductAttrs {
-  user: UserDoc;
   name: string;
   imageURL: string;
   category: string;
@@ -26,7 +25,7 @@ export interface ProductDoc extends mongoose.Document {
 
 // Describes what properties and methods a product model has
 export interface ProductModel extends mongoose.Model<ProductDoc> {
-  build(attrs: ProductAttrs): ProductDoc;
+  build(attrs: ProductAttrs & { user: UserDoc }): ProductDoc;
 }
 
 const ProductSchema = new mongoose.Schema({
