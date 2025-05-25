@@ -23,6 +23,7 @@ const globalErrorHandler = (err: CustomError, req: Request, res: Response, next:
     return res.status(400).send({
       status: 'error',
       message: 'Bad JSON request body',
+      data: null,
     });
   }
 
@@ -31,6 +32,7 @@ const globalErrorHandler = (err: CustomError, req: Request, res: Response, next:
     return res.status(400).send({
       status: 'error',
       message: 'Invalid resource ID',
+      data: null,
     });
   }
 
@@ -40,6 +42,7 @@ const globalErrorHandler = (err: CustomError, req: Request, res: Response, next:
     return res.status(400).send({
       status: 'error',
       message: `${keyVal} already exists`,
+      data: null,
     });
   }
 
@@ -50,6 +53,7 @@ const globalErrorHandler = (err: CustomError, req: Request, res: Response, next:
     return res.status(400).send({
       status: 'error',
       message: `Invalid input data: ${messageArr.join(', ')}`,
+      data: null,
     });
   }
 
@@ -58,6 +62,7 @@ const globalErrorHandler = (err: CustomError, req: Request, res: Response, next:
     return res.status(401).send({
       status: 'error',
       message: 'Invalid token. Please login again',
+      data: null,
     });
   }
 
@@ -66,6 +71,7 @@ const globalErrorHandler = (err: CustomError, req: Request, res: Response, next:
     return res.status(401).send({
       status: 'error',
       message: 'Your token has expired. Please login again',
+      data: null,
     });
   }
 
@@ -75,7 +81,7 @@ const globalErrorHandler = (err: CustomError, req: Request, res: Response, next:
   const statusCode = err.statusCode === 200 ? 500 : err.statusCode ?? 500;
   const message = `${statusCode}`.startsWith('4') ? err.message : 'Something went wrong';
 
-  return res.status(statusCode).send({ status: 'error', message });
+  return res.status(statusCode).send({ status: 'error', message, data: null });
 };
 
 export { globalErrorHandler };

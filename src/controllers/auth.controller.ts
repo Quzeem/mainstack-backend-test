@@ -14,6 +14,7 @@ export const signUp = async (req: Request, res: Response) => {
   res.status(201).send({
     status: 'success',
     message: 'User registered successfully',
+    data: null,
   });
 };
 
